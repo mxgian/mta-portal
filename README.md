@@ -10,7 +10,19 @@ This is a fork of https://github/com/alejandrorascovan/mta-portal which has not 
 5) The included code is very basic as it only can handle 1 train line, and N / S directions.  In my case, my station has 2 train lines and therefore I need to filter out the train times for each line.  If your train station has multiple lines, you will need to do the same. 
 
 Other Tips:
--Station IDs: 
+-The train times are sourced from the MTA how it relies on a JSON proxy (https://api.wheresthefuckingtrain.com/) which is run by a 3rd party without much documentation.  This itself is a fork https://github.com/jonthornton/MTAPI, if you want to be safe consider deploying this proxy yourself.  
+-Station IDs: There is a list of station IDs included, however it only includes the Lat/Long.  You can cross-reference the station names from the MTAPI project: https://github.com/jonthornton/MTAPI/blob/master/data/stations.csv You need to load the station-id statically at the top of the code.py
+--I've included a screenshot example of all the libraries i've used, no guarantees that these are the minimum
+
+Customizing the Display
+-For a 128x64 display you will only have room for 2 rows.  the default code arranges it as northbound/southbound for the G train.  If you would like to alter this you will need to modify the code.py to extract the train times for the train and directions of your choosing, and then print them out on the appropriate row.  You will also need to create new bitmap logos for the associated trains.  
+-The station names are hard-coded, update them with your's but keep in the mind the character limit (7 characters)
+-I've included new bitmaps for my station, but two F trains as well as an F and G train.  These are loaded statically, pick the one you want to use or create your own using a pixel-editor
+
+Practical Customized Example
+
+For my board, my station is the 7Av station in Brooklyn for the F & G trains, this is station id F24.  As we only have 2 rows to work with, i wanted the northbound Queens trains for both the F & G, ignoring the southbound Brookyln/Coney Island trains.  I updated the code to filter out the train times for the F & G trains into separate arrays and then i print out the times for the trains and directions i want.  
+
 
 
 
